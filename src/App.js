@@ -3,7 +3,7 @@ import data from "./data.json";
 //components
 import Header from "./Header";
 import ToDoList from "./ToDoList";
-
+import TextAdd from './TextAdd';
 import './App.css';
 
 function App() {
@@ -23,15 +23,23 @@ function App() {
     setToDoList(filtered);
   } 
 
+  const handleSubmit = (userInput) => {
+    addTask(userInput);
+  }
+  
+  const addTask = (userInput) => {
+    let copy = [...toDoList];
+    copy = [...copy, { id: toDoList.length + 1, task: userInput, complete: false }];
+    setToDoList(copy);
+  } 
+
  return (
    <div className="App">
      <Header />
-     <ToDoList toDoList={toDoList} handleToggle={handleToggle} />
+     <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter} />
+     <TextAdd handleSubmit={handleSubmit} />
    </div>
 );
 }
-
-
-
 
 export default App;
